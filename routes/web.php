@@ -22,10 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('home', [GuestHomeController::class, 'index'])->name('home'); //Pagina home per utenti guest
+Route::get('/home', [GuestHomeController::class, 'index'])->name('index.home'); //Pagina home per utenti guest
 
 route::middleware('auth')->name('admin.')->prefix('admin/')->group(function(){
 
-        Route::get('admin/home', [AdminHomeController::class, 'index'])->name('admin.home'); //(Pagina Home per utenti loggati)
+        Route::get('home', [AdminHomeController::class, 'index'])->name('home'); //(Pagina Home per utenti loggati)
     }
 );
