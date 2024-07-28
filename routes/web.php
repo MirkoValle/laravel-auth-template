@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\HomeController as GuestHomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,4 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('home', [GuestHomeController::class, 'index'])->name('home'); //Pagina home per utenti guest
+
+route::middleware('auth')->name('admin.')->prefix('admin/')->group(function(){
+
+        Route::get('admin/home', [AdminHomeController::class, 'index'])->name('admin.home'); //(Pagina Home per utenti loggati)
+    }
+);
